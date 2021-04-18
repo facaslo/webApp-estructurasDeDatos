@@ -1,0 +1,20 @@
+{% extends 'base/base.html' %}
+
+{% block titulo%}
+    <title> Registrarse </title>    
+{% endblock %}
+
+{% block content %}
+    {% from "_macro.html" import render_field %}
+    
+    <form name="Register" method="POST">
+        <dl>
+            {{ render_field(form.username) }}
+            {{ render_field(form.password) }}   
+            {{ render_field(form.passwordConfirmation) }}          
+        </dl>
+        <p> <input type = submit> </p>
+    </form>
+{% endblock %}
+
+
