@@ -121,7 +121,10 @@ class LinkedList:
         if self.head != None:
             self.copy = self.head
             while self.copy != None:
-                print(self.copy.data)
+                if type(self.copy.data) == LinkedList:
+                    self.copy.data.impr()
+                else:
+                    print(self.copy.data)
                 self.copy = self.copy.next
         else:
             print("Lista vacía.")

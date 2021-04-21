@@ -1,4 +1,4 @@
-import requests
+#import requests
 import json
 
 apiKey = "f82927e8dbbd48eab7d2b49482f026eb"
@@ -15,7 +15,7 @@ with open("response.txt", 'w') as outfile:
 
 #Ejemplo de parseo de json
 
-with open('ejemplo.txt') as json_file:
+with open('Ejemplo1.txt') as json_file:
     data = json.load(json_file)
     print(len(data["results"])) 
     for p in data["results"]:
