@@ -1,20 +1,26 @@
 {% extends 'base/base.html' %}
 
 {% block titulo%}
-    <title> Registrarse </title>    
+    <link rel="stylesheet" type = "text/css" href = "{{ url_for('static', filename='css/styleform.css') }}">
+    <title> Registrarse </title>        
 {% endblock %}
 
 {% block content %}
     {% from "_macro.html" import render_field %}
     
-    <form name="Register" method="POST">
-        <dl>
-            {{ render_field(form.username) }}
-            {{ render_field(form.password) }}   
-            {{ render_field(form.passwordConfirmation) }}          
-        </dl>
-        <p> <input type = submit> </p>
-    </form>
+
+    <div class="register">
+        <h1> Regístrese en Game Collector </h1>
+        <form name="Register" method="post">
+            <dl>
+                {{ render_field(form.username, class="formInput") }}
+                {{ render_field(form.password, class="formInput") }}   
+                {{ render_field(form.passwordConfirmation, class="formInput") }}              
+            </dl>
+            <button type="submit" class="btn btn-primary btn-block btn-large"> Registrarse </button>
+        </form>
+    </div>   
+
 {% endblock %}
 
 
