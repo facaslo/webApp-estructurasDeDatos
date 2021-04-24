@@ -1,7 +1,8 @@
 import json
 import LinkedLists
+import time
 
-
+start = time.time()
 games = LinkedLists.LinkedList()
 with open('C:\\Users\\Daniel\\Downloads\\webApp-estructurasDeDatos\\src\\my.packages\\Ejemplo1.json') as json_file:
     data = json.load(json_file)
@@ -18,3 +19,5 @@ with open('C:\\Users\\Daniel\\Downloads\\webApp-estructurasDeDatos\\src\\my.pack
                 else:
                     gamelist.pushBack(game[str(atri)])
         games.pushBack(gamelist)
+end = time.time()
+print(end-start)

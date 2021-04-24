@@ -128,3 +128,41 @@ class LinkedList:
                 self.copy = self.copy.next
         else:
             print("Lista vacía.")
+
+class Stack:
+    def __init__(self):
+        super().__init__()
+        self.head = None
+        self.tail = None
+        self.count = 0
+
+    def push(self, data):
+        self.node = Node(data)
+        if self.tail == None:
+            self.tail = self.node
+            self.head = self.tail
+        else:
+            self.tail.next = self.node
+            self.node.prev = self.tail
+            self.tail = self.node
+        self.count += 1
+
+    def Top(self):
+        return self.tail.data
+
+    def Pop(self):
+        if self.head == None:
+            print("Error: lista vacía.")
+        elif self.head == self.tail:
+            self.value = self.tail.data
+            self.tail = None
+            self.head = self.tail
+            self.count -= 1
+        else:
+            self.tail = self.tail.prev
+            self.tail.next = None
+            self.count -= 1
+        return self.value
+
+    def empty(self):
+        return self.head == None
