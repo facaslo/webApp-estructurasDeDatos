@@ -3,13 +3,14 @@ class Node:
         super().__init__()
         self.data = data
         self.next = None
-        self.prev = None
+        self.prev = None        
 
 class LinkedList:
     def __init__(self):
         super().__init__()
         self.head = None
         self.tail = None
+        self.index = None
         self.count = 0
 
     def pushFront(self, data):
@@ -117,6 +118,30 @@ class LinkedList:
             self.head = self.node_2
         self.count += 1
 
+    def orderedInsertion(self, data):
+        newNode = Node(data)
+        if self.head == None:
+            self.head = newNode
+            self.tail = newNode
+        elif newNode.data < self.head.data:
+            self.head.prev = newNode
+            newNode.next = self.head
+            self.head = newNode
+        elif newNode.data > self.tail.data:
+            self.tail.next = newNode
+            newNode.prev = self.tail
+            self.tail = newNode
+        else:
+            temp = self.head.next
+            while temp.data < newNode.data:
+                temp = temp.next
+            
+            temp.prev.next = newNode
+            newNode.prev = temp.prev
+            temp.prev = newNode
+            newNode.next = temp
+            
+
     def impr(self):
         if self.head != None:
             self.copy = self.head
@@ -128,3 +153,66 @@ class LinkedList:
                 self.copy = self.copy.next
         else:
             print("Lista vacía.")
+
+    def sortList(self, increasing):
+        if self.head == None:
+            print("La lista está vacía")
+        elif self.head.next == None:
+            print("La lista solo tiene un elemento")
+        else:            
+            currentNode = self.head    
+            while(currentNode.next != None):  
+                  
+                self.index = currentNode.next   
+                while(self.index != None):                          
+                    if(currentNode.data > self.index.data and increasing == True):    
+                        temp = currentNode.data
+                        currentNode.data = self.index.data  
+                        self.index.data = temp  
+                    elif(currentNode.data < self.index.data and increasing == False): 
+                        temp = currentNode.data
+                        currentNode.data = self.index.data  
+                        self.index.data = temp  
+                    self.index = self.index.next    
+                currentNode = currentNode.next      
+
+            
+class Stack:
+    def __init__(self):
+        super().__init__()
+        self.head = None
+        self.tail = None
+        self.count = 0
+
+    def push(self, data):
+        self.node = Node(data)
+        if self.tail == None:
+            self.tail = self.node
+            self.head = self.tail
+        else:
+            self.tail.next = self.node
+            self.node.prev = self.tail
+            self.tail = self.node
+        self.count += 1
+
+    def Top(self):
+        return self.tail.data
+
+    def Pop(self):
+        if self.head == None:
+            print("Error: lista vacía.")
+        elif self.head == self.tail:
+            self.value = self.tail.data
+            self.tail = None
+            self.head = self.tail
+            self.count -= 1
+        else:
+            self.tail = self.tail.prev
+            self.tail.next = None
+            self.count -= 1
+        return self.value
+
+    def empty(self):
+        return self.head == None
+
+

@@ -18,19 +18,23 @@ class RegisterForm(Form):
             [
                 validators.DataRequired(message= 'El username es requerido'),
                 validators.length(min=4, max=25, message="¡Ingrese un username valido!")                 
-            ]
+            ],
+            render_kw={"placeholder": "Username"}
             )
    
     password = PasswordField('Password',
             [
-                validators.DataRequired(message= 'La password es requerida')             
-            ]
+                validators.DataRequired(message= 'La password es requerida')                      
+            ],
+            render_kw={"placeholder": "Password"}
             )
     
     passwordConfirmation = PasswordField('Password confirmation',
             [
-                validators.DataRequired(message= 'La confirmación de password es requerida')             
-            ]
+                validators.DataRequired(message= 'La confirmación de password es requerida'),        
+                validators.EqualTo('password', message= 'Las confirmación de contraseña no coincide')
+            ],
+            render_kw={"placeholder": "Password confirmation"}
             )
 
     """ Campo para hacer caer a bots """
