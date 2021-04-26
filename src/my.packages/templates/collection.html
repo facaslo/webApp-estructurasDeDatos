@@ -2,24 +2,24 @@
 
 {% block titulo %}
     <link rel="stylesheet" type = "text/css" href = "{{ url_for('static', filename='css/styleuser.css') }}">
-    <title id = titulo> Mis colecciones </title> 
+    <title id = titulo> {{listaX}} </title> 
 {% endblock %}
 
 {% block content%}    
     
     <div id=container>
         
-        <h1> Bienvenido(a) {{usuario}} </h1>
+        <h1> Está viendo los contenidos de la lista: {{listaX}} </h1>
         
         {% from "_macro.html" import show_collection %}
 
         
-        {{ show_collection(listaX, usuario) }}        
+        {{ show_collection(listaX) }}        
 
     </div>
     
 
-    <form action="{{usuario}}/crearColeccion">
+    <form action="">
         <input type="submit" value="Crear coleccion">
     </form>
     <form action="/logout">

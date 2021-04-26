@@ -28,11 +28,11 @@ body {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3E1D6D', endColorstr='#092756',GradientType=1 );
 }
 
-.login, .register {  
+.login, .register, .createList {  
   position : absolute;
-  top: 20%;  
+  top: 10%;  
 }
-.login h1, .register h1 { color: white; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; text-align:center; }
+.login h1, .register h1, .createList h1 { color: white; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; text-align:center; }
 
 .formInput { 
   width: 100%; 

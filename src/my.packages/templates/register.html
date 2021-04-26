@@ -2,7 +2,9 @@
 
 {% block titulo%}
     <link rel="stylesheet" type = "text/css" href = "{{ url_for('static', filename='css/styleform.css') }}">
+    <script defer  src="{{ url_for('static', filename='javascript/register.js') }}" type="text/javascript"> </script>
     <title> Registrarse </title>        
+        
 {% endblock %}
 
 {% block content %}
@@ -19,6 +21,15 @@
             </dl>
             <button type="submit" class="btn btn-primary btn-block btn-large"> Registrarse </button>
         </form>
+
+        <form action="login" style="padding-top: 4vh ;">
+            <button type="submit" class="btn btn-primary btn-block btn-large"> Iniciar sesión </button>      
+        </form>
+
+        <form action="/" style="padding-top: 4vh ;">
+            <button type="submit" class="btn btn-primary btn-block btn-large"> Volver a inicio   </button>      
+        </form>
+        
     </div>   
 
 {% endblock %}

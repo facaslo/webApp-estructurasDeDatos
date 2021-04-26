@@ -17,8 +17,12 @@
 
 {% endmacro %}
 
-{% macro show_collection(coleccion) %}
-    {% for elemento in collecion %}
-        <li> {{elemento}} </li>
-    {% endfor %}
+{% macro show_collection(coleccion,usuario) %}
+    <ol>
+        {% for elemento in coleccion %}
+            <li> <a href="/{{usuario}}/{{elemento}}"> {{elemento}} </a> </li>
+        {% endfor %}
+    </ol>
 {% endmacro %}
+
+

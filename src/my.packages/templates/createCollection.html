@@ -1,0 +1,29 @@
+{% extends 'base/base.html' %}
+
+{% block titulo %}
+    <link rel="stylesheet" type = "text/css" href = "{{ url_for('static', filename='css/styleform.css') }}">
+    <title> Crear coleccion </title>     
+
+{% endblock %}
+
+{% block content %}
+    {% from "_macro.html" import render_field%}
+
+    <div class="createList">
+        <h1>Agregar coleccion </h1>
+        <form name="AgregarColeccion" method="post">
+            <dl>
+            {{ render_field(form.nombreColeccion, class="formInput" ) }}
+                     
+            </dl>
+            <button type="submit" class="btn btn-primary btn-block btn-large">Crear lista</button>      
+            
+        </form>
+
+        <form action="/" style="padding-top: 4vh ;">
+            <button type="submit" class="btn btn-primary btn-block btn-large"> Volver </button>      
+        </form>
+        
+    </div>    
+
+{% endblock %}
