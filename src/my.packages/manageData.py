@@ -37,8 +37,7 @@ def cargarBaseJuegos(tipo):
 
 def cargarUsuarios(total , tipo):
     with open(database_path + '\\users.csv', newline="" , encoding='utf-8') as csvfile:
-        coleccionUsuarios = csv.reader(csvfile, delimiter=',')
-        next(coleccionUsuarios)
+        coleccionUsuarios = csv.reader(csvfile, delimiter=',')        
 
         if(tipo == "linked"):
             todosLosUsuarios = DataStructures.LinkedList()                    
@@ -81,11 +80,13 @@ def agregarUsuarioEnEstructura(tipo, estructura, user, password):
     elif(tipo == "dynamic"):
         nuevaEntrada = cargarDuplaUserPassword("dynamic" , user, password)
 
-    estructura.pushFront(nuevaEntrada)   
+    estructura.pushFront(nuevaEntrada)
+
+    return estructura   
     
 
 def escribirUsuarioCSV(estructura):
-    with open(database_path + "\\newDatabase.csv" , "w" , newline="") as outfile:
+    with open(database_path + "\\users.csv" , "w" , newline="") as outfile:
         writer = csv.writer(outfile)
         for elemento in estructura:            
             writer.writerow(elemento)

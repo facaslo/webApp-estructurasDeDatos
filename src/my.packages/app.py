@@ -89,8 +89,8 @@ def register():
                 return redirect('/register?message={}'.format(message), code=302)
         
         
-        manageData.agregarUsuarioEnEstructura(tipo , usuarios , user , password)
-        manageData.escribirUsuarioCSV(usuarios)
+        nuevosUsuarios = manageData.agregarUsuarioEnEstructura(tipo , usuarios , user , password)
+        manageData.escribirUsuarioCSV(nuevosUsuarios)
         manageData.escribirUsuarioJson(user)
 
         return redirect('/login?message={}'.format(message), code=302)
