@@ -1,2 +1,2 @@
-Aquí va a ir el ejecutable del programa
+Aquí va a ir el ejecutable del programa, de momento ir a la carpeta src/ my.packages y ejecutar app.py
 
