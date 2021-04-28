@@ -2,7 +2,15 @@
 
 {% block titulo %}
     <link rel="stylesheet" type = "text/css" href = "{{ url_for('static', filename='css/styleform.css') }}">
-    <title> Crear coleccion </title>     
+    <title> Crear coleccion </title> 
+    
+
+    <script>
+        let urlBack = "/user?id={{id}}"
+        function getBack(){            
+            window.location.href = urlBack;
+        } 
+    </script>
 
 {% endblock %}
 
@@ -11,18 +19,18 @@
 
     <div class="createList">
         <h1>Agregar coleccion </h1>
-        <form name="AgregarColeccion" method="post">
+        <form name="AgregarColeccion" method="post" style="margin-bottom:2vh ;">
             <dl>
             {{ render_field(form.nombreColeccion, class="formInput" ) }}
                      
             </dl>
-            <button type="submit" class="btn btn-primary btn-block btn-large">Crear lista</button>      
+            <button type="submit" class="btn btn-primary btn-block btn-large" >Crear lista</button>      
             
         </form>
 
-        <form action="/" style="padding-top: 4vh ;">
-            <button type="submit" class="btn btn-primary btn-block btn-large"> Volver </button>      
-        </form>
+        
+            <button onclick="getBack()" class="btn btn-primary btn-block btn-large"> Volver </button>      
+        
         
     </div>    
 

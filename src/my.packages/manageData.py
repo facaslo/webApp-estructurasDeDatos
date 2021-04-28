@@ -112,7 +112,7 @@ def recuperarListaUsuario(usuario, tipo):
 
     return colecciones
 
-def escribirListaUsuario(usuario, nombreLista):
+def crearListaEnUsuario(usuario, nombreLista):
     with open(database_path + "\\listasDeLosUsuarios.txt") as json_listas:
         listasDeUsuarios = json.load(json_listas)
     listasDeUsuarios[usuario][nombreLista] = []
@@ -137,6 +137,61 @@ def getContenidosLista(usuario, nom_lista, tipo):
     
     return colecciones
 
+def escribirContenidosLista(usuario, nom_lista, slug, agregar):
+    with open(database_path + "\\listasDeLosUsuarios.txt") as json_listas:
+        listasDeUsuarios = json.load(json_listas)
+        contenidos = listasDeUsuarios[usuario][nom_lista]
+
+    if slug in contenidos and agregar == False:
+        contenidos.remove(slug)
+    elif slug not in contenidos and agregar == True:
+        contenidos.append(slug) 
+
+    with open(database_path + "\\listasDeLosUsuarios.txt", "w") as outfile:
+        json.dump(listasDeUsuarios, outfile)
+    
+
+def gameInCollection(nombre_juego, todosLosJuegos):
+    game = None
+    for juego in todosLosJuegos:
+        if nombre_juego == juego.getElement(1):            
+            game = juego    
+            break
+    return game
+
+def actualizarListasEnJSON(usuario, colecciones):
+    with open(database_path + "\\listasDeLosUsuarios.txt") as json_listas:
+        listasDeUsuarios = json.load(json_listas)
+    for lista in listasDeUsuarios[usuario]:
+        if colecciones.find(lista) == -1:
+            del listasDeUsuarios[usuario][lista]
+            break
+    
+    with open(database_path + "\\listasDeLosUsuarios.txt", "w") as outfile:
+        json.dump(listasDeUsuarios, outfile)
+
+def searchGame(nombre, juegos, tipo):
+    if( tipo == "linked"):
+        resultado = DataStructures.LinkedList()
+        
+    elif( tipo == "dynamic"):
+        resultado = DataStructures.Array_Dinamic()
+
+    for juego in juegos:
+        if nombre.lower() in juego.getElement(0).lower():
+            resultado.sortedInsertion(juego)
+    
+    return resultado
+
+
+    
+
+        
+
+
+
+
+    
 
 
 #end = time.time()

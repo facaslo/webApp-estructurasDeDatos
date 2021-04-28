@@ -15,6 +15,9 @@ class LinkedList:
         self.index = None
         self.count = 0
 
+    def size(self):
+        return self.count
+
     def pushFront(self, data):
         self.node = Node(data)
         self.node.next = self.head
@@ -120,28 +123,50 @@ class LinkedList:
             self.head = self.node_2
         self.count += 1
 
-    def orderedInsertion(self, data):
+    def sortedInsertion(self, data , increasing= True):
         newNode = Node(data)
-        if self.head == None:
-            self.head = newNode
-            self.tail = newNode            
-        elif newNode.data < self.head.data:
-            self.head.prev = newNode
-            newNode.next = self.head
-            self.head = newNode
-        elif newNode.data > self.tail.data:
-            self.tail.next = newNode
-            newNode.prev = self.tail
-            self.tail = newNode
+        if increasing:
+            if self.head == None:
+                self.head = newNode
+                self.tail = newNode            
+            elif newNode.data < self.head.data:
+                self.head.prev = newNode
+                newNode.next = self.head
+                self.head = newNode
+            elif newNode.data > self.tail.data:
+                self.tail.next = newNode
+                newNode.prev = self.tail
+                self.tail = newNode
+            else:
+                temp = self.head.next
+                while temp.data < newNode.data:
+                    temp = temp.next            
+                temp.prev.next = newNode
+                newNode.prev = temp.prev
+                temp.prev = newNode
+                newNode.next = temp
         else:
-            temp = self.head.next
-            while temp.data < newNode.data:
-                temp = temp.next            
-            temp.prev.next = newNode
-            newNode.prev = temp.prev
-            temp.prev = newNode
-            newNode.next = temp
-        self.count += 1   
+            if self.head == None:
+                self.head = newNode
+                self.tail = newNode            
+            elif newNode.data > self.head.data:
+                self.head.prev = newNode
+                newNode.next = self.head
+                self.head = newNode
+            elif newNode.data < self.tail.data:
+                self.tail.next = newNode
+                newNode.prev = self.tail
+                self.tail = newNode
+            else:
+                temp = self.head.next
+                while temp.data > newNode.data:
+                    temp = temp.next            
+                temp.prev.next = newNode
+                newNode.prev = temp.prev
+                temp.prev = newNode
+                newNode.next = temp
+        self.count += 1 
+           
 
     def impr(self):
         if self.head != None:
@@ -219,17 +244,16 @@ class LinkedList:
         if self.count == other.count and self.count > 0 and self.getElement(i) < other.getElement(i):
             lessThan = True
         return lessThan
-
+    
+    def __lt__(self, other):
+        lessThan = False
+        if isinstance(other, LinkedList) and self.count == other.count and self.count > 0:
+            if self.getElement(0) < other.getElement(0):
+                lessThan = True
+        return lessThan
 
 #############################################################
 
-""" lista = LinkedList()
-lista2 = LinkedList() 
-
-lista.pushBack(1)
-lista.pushBack(2)
-lista2.pushBack(3)
-lista2.pushBack(4) """
 
 class Array_Dinamic():
 
@@ -286,7 +310,7 @@ class Array_Dinamic():
         self.Arr[self.Size] = Value
         self.Size += 1
 
-    def Remove(self, Index):
+    def erase(self, Index):
         if Index > self.Size or Index < 0:
             raise IndexError("Indice fuera del rango")
         for i in range(Index , self.Size-2):
@@ -295,7 +319,7 @@ class Array_Dinamic():
 
     def emptyList(self):
         while self.size() > 0 :
-            self.Remove(0)
+            self.erase(0)
     
     def find(self, data):
         for i in range(self.Size):
@@ -325,33 +349,81 @@ class Array_Dinamic():
                         equal = False
                         break
         return equal
+
+    def __lt__(self,other):
+        lessThan = False      
+        if isinstance(other, Array_Dinamic) and self.size() == other.size() and self.size() > 0:
+            if self.getElement(0) < other.getElement(0):
+                lessThan = True
+        return lessThan
     
     def lessThan(self,other,i):
         lessThan = False
         if self.Size == other.Size and self.Size > 0 and self.getElement(i) < other.getElement(i):
             lessThan = True
-        return lessThan           
+        return lessThan     
+    
+    def sortedInsertion(self, value ,increasing = True):
+        self.Size += 1
+        index = 0
+        if self.Size == 1:
+            self.Arr[0] = value
+        elif increasing:      
+            if self.Size > self.capacity:
+                self.capacity *= 2
+                arr1 = [None for i in range(self.capacity)]                 
+                while value > self.getElement(index):                   
+                    index += 1
+                    if(index == self.Size-1):
+                        break                                                           
+                for i in range(index):
+                    arr1[i] = self.getElement(i)
+                arr1[index] = value
+                for i in range(index, self.size() -1):
+                    arr1[i+1] =  self.getElement(i)
+                self.Arr = arr1
+                
+            else:            
+                while value > self.getElement(index):
+                    index += 1
+                    if(index == self.Size-1):
+                        break  
+                for i in range(self.size()-2, index-1, -1):
+                    self.Arr[i+1] = self.Arr[i]
+                self.Arr[index] = value                
+            
+        elif not increasing:            
+            if self.Size > self.capacity:   
+                self.capacity*=2             
+                arr1 = [None for i in range(self.capacity)]            
+                while value < self.getElement(index) :
+                    index += 1
+                    if(index == self.Size-1):
+                        break
+                for i in range(index):
+                    arr1[i] = self.getElement(i)
+                arr1[index] = value
+                for i in range(index, self.size() -1):
+                    arr1[i+1] =  self.getElement(i)
+                self.Arr = arr1
+            else:            
+                while value < self.getElement(index):
+                    index += 1
+                    if(index == self.Size-1):
+                        break
+                for i in range(self.size()-2, index-1, -1):
+                    self.Arr[i+1] = self.Arr[i]
+                self.Arr[index] = value       
+                
 
-   
-"""def orderedInsertion(self, value):
-        self.size += 1
-        if self.size > self.capacity: """
+
+
             
 
 #############################################################
-""" lista = Array_Dinamic()
-lista.pushBack(1)
-lista.pushBack(2)
-lista.pushBack(3)
-lista.printArray()
 
-lista.emptyList()
-lista.printArray()
 
-lista.pushFront(1)
-lista.pushFront(2)
-lista.pushFront(3)
-lista.printArray() """
+
 
 class Stack:
     def __init__(self):

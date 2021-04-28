@@ -41,5 +41,19 @@ with open(base_path + "\\listasDeLosUsuarios.txt" , "w") as outfile:
     json.dump(diccionarioUsuarios, outfile)
 '''
 
+with open(base_path + '\\game_info.csv', newline="" , encoding='utf-8') as csvfile:
+    csvTodosLosJuegos = csv.reader(csvfile, delimiter=',')
+    next(csvTodosLosJuegos)
+    games = []
+    for row in csvTodosLosJuegos:
+        games.append(row[1])
+
+with open(base_path + "\\listasDeLosUsuarios.txt") as json_file:
+    data = json.load(json_file)
+    data["ADMIN"]["Lista de todos los juegos"] = games
+    with open(base_path + "\\listasDeLosUsuarios.txt" , "w") as outfile:
+        json.dump(data, outfile)
+
+
 
 

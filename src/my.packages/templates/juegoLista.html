@@ -1,0 +1,45 @@
+{% extends 'base/base.html' %}
+
+{% block titulo %}
+    <link rel="stylesheet" type = "text/css" href = "{{ url_for('static', filename='css/styleuser.css') }}">
+    <title id = titulo> {{nombre_Juego}} </title>  
+    
+    <script>
+         const urlJuegoEliminado = "/{{id}}/{{nombre_lista}}/{{slug}}/eliminarJuego"
+        function removeGame(){            
+            window.location.href = urlJuegoEliminado;
+        } 
+    </script>
+{% endblock %}
+
+{% block content%}    
+    
+    <div id=container>
+
+        
+      
+        <button onclick="removeGame()" class="btn btn-primary btn-block btn-large"> Eliminar Juego de la lista</button>      
+        
+
+        <form action="">
+            <button type="submit" class="btn btn-primary btn-block btn-large"> Volver </button>      
+        </form>    
+
+        <ol>
+            <li> Nombre: {{info_juego.getElement(0)}} </li>
+            <li> Fecha de lanzamiento : {{info_juego.getElement(2)}} </li>
+            <li> Puntaje en metacritic: {{info_juego.getElement(3)}} </li>
+            <li> Página web: {{info_juego.getElement(4)}} </li>
+            <li> Plataformas: {{info_juego.getElement(5)}} </li> 
+            <li> Desarrolladoras: {{info_juego.getElement(6)}} </li>
+            <li> Géneros: {{info_juego.getElement(7)}} </li>
+            <li> Distribuidora: {{info_juego.getElement(8)}} </li>
+            <li> Rating Esrb: {{info_juego.getElement(9)}} </li>
+        </ol>
+
+            
+               
+        
+    </div>      
+    
+{% endblock %}

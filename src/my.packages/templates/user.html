@@ -8,8 +8,14 @@
 {% block content%}    
     
     <div id=container>
-        
         <h1> Bienvenido(a) {{usuario}} </h1>
+        <form action="{{usuario}}/crearColeccion">
+            <input type="submit" value="Crear coleccion">
+        </form>
+        
+        <form action="/logout">
+            <input type="submit" value="Salir de mi cuenta">
+        </form>    
         
         {% from "_macro.html" import show_collection %}
 
@@ -19,11 +25,5 @@
     </div>
     
 
-    <form action="{{usuario}}/crearColeccion">
-        <input type="submit" value="Crear coleccion">
-    </form>
-    <form action="/logout">
-        <input type="submit" value="Salir de mi cuenta">
-    </form>
     
 {% endblock %}
