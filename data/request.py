@@ -20,7 +20,7 @@ response = requestQuery.json()
 with open("response.txt", 'w') as outfile:
     json.dump(response, outfile) """
 
-'''
+
 #Ejemplo de parseo de json
 diccionarioUsuarios = {}
 total = 5000
@@ -39,7 +39,7 @@ with open(base_path + '\\users.csv', newline="" , encoding='utf-8') as csvfile:
     
 with open(base_path + "\\listasDeLosUsuarios.txt" , "w") as outfile:
     json.dump(diccionarioUsuarios, outfile)
-'''
+
 
 with open(base_path + '\\game_info.csv', newline="" , encoding='utf-8') as csvfile:
     csvTodosLosJuegos = csv.reader(csvfile, delimiter=',')
@@ -48,11 +48,11 @@ with open(base_path + '\\game_info.csv', newline="" , encoding='utf-8') as csvfi
     for row in csvTodosLosJuegos:
         games.append(row[1])
 
-with open(base_path + "\\listasDeLosUsuarios.txt") as json_file:
+""" with open(base_path + "\\listasDeLosUsuarios.txt") as json_file:
     data = json.load(json_file)
     data["ADMIN"]["Lista de todos los juegos"] = games
     with open(base_path + "\\listasDeLosUsuarios.txt" , "w") as outfile:
-        json.dump(data, outfile)
+        json.dump(data, outfile) """
 
 
 

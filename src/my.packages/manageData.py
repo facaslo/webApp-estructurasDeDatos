@@ -19,7 +19,7 @@ def cargarBaseJuegos(tipo):
         if(tipo == "linked"):
             todosLosJuegos = DataStructures.LinkedList()        
             for row in csvTodosLosJuegos:
-                juego = DataStructures.LinkedList()
+                juego = DataStructures.Array_Dinamic()
                 for campo in row:
                     juego.pushBack(campo)
                 todosLosJuegos.pushBack(juego)  
@@ -81,7 +81,7 @@ def agregarUsuarioEnEstructura(tipo, estructura, user, password):
     elif(tipo == "dynamic"):
         nuevaEntrada = cargarDuplaUserPassword("dynamic" , user, password)
 
-    estructura.pushBack(nuevaEntrada)   
+    estructura.pushFront(nuevaEntrada)   
     
 
 def escribirUsuarioCSV(estructura):

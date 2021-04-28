@@ -150,7 +150,7 @@ def coleccionJuegos(id, lista):
             infoJuego = manageData.gameInCollection(juego, juegos)          
             if infoJuego == None:    
                 return render_template('404.html'), 404    
-            return render_template("juegoLista.html", info_juego = infoJuego, nombre_Juego = infoJuego.getElement(0), nombre_lista= lista, id=id) 
+            return render_template("juegoLista.html", info_juego = infoJuego, slug = infoJuego.getElement(1), nombre_Juego = infoJuego.getElement(0), nombre_lista= lista, id=id) 
 
     else:
         return render_template('401.html'), 401
@@ -203,10 +203,10 @@ def agregarJuego(id, lista, slug_juego):
     else:
         return render_template('401.html'), 401 
 
-@app.route('/<id>/<lista>/<slug>/eliminarJuego' , methods = ['GET','POST'])
-def eliminarJuego(id, lista, slug): 
+@app.route('/<id>/<lista>/<slug_juego>/eliminarJuego' , methods = ['GET','POST'])
+def eliminarJuego(id, lista, slug_juego): 
     if autentication and id == session['username']: 
-        manageData.escribirContenidosLista(id,lista, slug, False)
+        manageData.escribirContenidosLista(id,lista, slug_juego, False)
         return redirect('/{}/{}'.format(id,lista))
     else:
         return render_template('401.html'), 401 
