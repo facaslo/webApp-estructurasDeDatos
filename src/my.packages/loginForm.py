@@ -18,13 +18,15 @@ class LoginForm(Form):
             [
                 validators.DataRequired(message= 'El username es requerido'),
                 validators.length(min=4, max=25, message="¡Ingrese un username valido!")                 
-            ]
+            ],
+            render_kw={"placeholder": "Username"}
             )
    
     password = PasswordField('Password',
             [
                 validators.DataRequired(message= 'La password es requerida')             
-            ]
+            ],
+            render_kw={"placeholder": "Password"}
             )
 
     """ Campo para hacer caer a bots """

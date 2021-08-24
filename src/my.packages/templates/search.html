@@ -1,0 +1,36 @@
+{% extends 'base/base.html' %}
+
+{% block titulo %}
+    <link rel="stylesheet" type = "text/css" href = "{{ url_for('static', filename='css/search.css') }}">
+    <title> Search game </title>  
+    
+    
+
+{% endblock %}
+
+{% block content %}
+    {% from "_macro.html" import render_field%}
+
+    <div id="container">
+        <h1 class="container_element">Introduzca el nombre del juego</h1>
+        <form name="search" method="post" class="container_element">
+            <dl>
+            {{ render_field(form.gameName, class="formInput")}}                       
+            </dl>
+            <button type="submit" class="btn btn-primary btn-block btn-large"> Buscar </button>      
+        </form>  
+        
+        <div class="container_element">
+            {% from "_macro.html" import show_results %}
+
+        
+        {{ show_results(resultados, id , nombreLista)  }}  
+        </div>
+       
+    </div>    
+
+    
+
+
+
+{% endblock %}

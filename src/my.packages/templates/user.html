@@ -1,21 +1,29 @@
 {% extends 'base/base.html' %}
 
 {% block titulo %}
-    <title id = titulo> Mi usuario </title> 
+    <link rel="stylesheet" type = "text/css" href = "{{ url_for('static', filename='css/styleuser.css') }}">
+    <title id = titulo> Mis colecciones </title> 
 {% endblock %}
 
 {% block content%}    
-    <ol>
-        {% for elemento in coleccion %}
-            <li> {{elemento}} </li>
-        {% endfor %}
-    </ol>
+    
+    <div id=container>
+        <h1> Bienvenido(a) {{usuario}} </h1>
+        <form action="{{usuario}}/crearColeccion">
+            <input type="submit" value="Crear coleccion">
+        </form>
+        
+        <form action="/logout">
+            <input type="submit" value="Salir de mi cuenta">
+        </form>    
+        
+        {% from "_macro.html" import show_collection %}
 
-    <form action="">
-        <input type="submit" value="Crear coleccion">
-    </form>
-    <form action="/">
-        <input type="submit" value="Salir de mi cuenta">
-    </form>
+        
+        {{ show_collection(listaX, usuario) }}        
 
+    </div>
+    
+
+    
 {% endblock %}

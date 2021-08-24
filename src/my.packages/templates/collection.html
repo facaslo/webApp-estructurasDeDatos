@@ -1,0 +1,78 @@
+{% extends 'base/base.html' %}
+
+{% block titulo %}
+    <link rel="stylesheet" type = "text/css" href = "{{ url_for('static', filename='css/styleuser.css') }}">
+    <title id = titulo> {{nombre}} </title> 
+    <script defer>
+        function sortList(ascending){
+            var list, i, switching, b, shouldSwitch;
+            list = document.getElementById("lista");
+            switching = true;
+            while (switching) {
+                switching = false;
+                b = list.getElementsByTagName("LI");
+                console.log(b.innerText)
+                for (i = 0; i < (b.length - 1); i++) {
+                shouldSwitch = false;
+                
+                if(ascending){
+                    if (b[i].innerText.toLowerCase() > b[i + 1].innerText.toLowerCase()) {
+                    shouldSwitch = true;
+                    break;
+                    }
+                } else{
+                    if (b[i].innerText.toLowerCase() < b[i + 1].innerText.toLowerCase()) {
+                    shouldSwitch = true;
+                    break;
+                    }
+                }
+                
+                }
+                if (shouldSwitch) {                
+                b[i].parentNode.insertBefore(b[i + 1], b[i]);
+                switching = true;
+                }
+            }
+        } 
+        
+        const Http = new XMLHttpRequest();
+        const urlBack = "/user?id={{nombreUser}}";
+
+        function getBack(){            
+            window.location.href = urlBack;
+        }      
+
+    </script>
+{% endblock %}
+
+{% block content%}    
+    
+    <div id=container>
+        
+        <h1> Estás viendo los contenidos de la colección: {{nombre}} </h1>
+
+        <button onclick="sortList(true)" class="btn btn-primary btn-block btn-large"> Ordenar lista (Ascendente) </button> 
+
+        <button onclick="sortList(false)" class="btn btn-primary btn-block btn-large"> Ordenar lista (Descendente) </button>   
+
+        <form action="/{{nombreUser}}/{{nombre}}/search">
+            <button type="submit" class="btn btn-primary btn-block btn-large"> Buscar juego </button>      
+        </form>
+
+        <form action="/{{nombreUser}}/{{nombre}}/eliminar_coleccion">
+            <button type="submit" class="btn btn-primary btn-block btn-large"> Eliminar colección </button>      
+        </form>
+
+        <button onclick="getBack()"> Volver </button>
+
+        
+
+        
+        {% from "_macro.html" import show_game %}
+
+        
+        {{ show_game(listaX,nombreUser,nombre, nombreJuegos)   }}        
+
+        
+    </div>    
+{% endblock %}
