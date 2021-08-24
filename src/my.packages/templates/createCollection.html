@@ -1,0 +1,37 @@
+{% extends 'base/base.html' %}
+
+{% block titulo %}
+    <link rel="stylesheet" type = "text/css" href = "{{ url_for('static', filename='css/styleform.css') }}">
+    <title> Crear coleccion </title> 
+    
+
+    <script>
+        let urlBack = "/user?id={{id}}"
+        function getBack(){            
+            window.location.href = urlBack;
+        } 
+    </script>
+
+{% endblock %}
+
+{% block content %}
+    {% from "_macro.html" import render_field%}
+
+    <div class="createList">
+        <h1>Agregar coleccion </h1>
+        <form name="AgregarColeccion" method="post" style="margin-bottom:2vh ;">
+            <dl>
+            {{ render_field(form.nombreColeccion, class="formInput" ) }}
+                     
+            </dl>
+            <button type="submit" class="btn btn-primary btn-block btn-large" >Crear lista</button>      
+            
+        </form>
+
+        
+            <button onclick="getBack()" class="btn btn-primary btn-block btn-large"> Volver </button>      
+        
+        
+    </div>    
+
+{% endblock %}
