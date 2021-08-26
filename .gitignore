@@ -3,4 +3,7 @@
 /workspace.xml
 *.csv
 *.txt
+/src/my.packages/static/node_modules
+/src/my.packages/static/sass
+/src/my.packages/static/package-lock.json
 

@@ -1,7 +1,7 @@
 import sys,os,pathlib
 from pathlib import Path
 flaskwtf_path = base_path = Path(__file__).parent.parent.parent
-flask_path = os.path.join(base_path, '.\\lib\\wtforms' )
+flask_path = os.path.join(base_path, './lib/wtforms' )
 sys.path.append(flaskwtf_path)
 
 from wtforms import Form

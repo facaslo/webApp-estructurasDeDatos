@@ -2,26 +2,26 @@
 
 {% block titulo %}    
     <title> Game collector </title> 
-    <link rel="stylesheet" type = "text/css" href = "{{ url_for('static', filename='css/styleindex.css') }}">    
+    <!-- <link rel="stylesheet" type = "text/css" href = "{{ url_for('static', filename='css/styleindex.css') }}">     -->
 {% endblock %}
 
 {% block content %}
     
-    <div id="container">
-        <div class = "container_element">
-            <img src="{{ url_for('static', filename = 'img/metroid.png')}}" >
-        </div>
+    <div class="container-fluid d-flex vh-100 align-items-center text-white">
+        <div class="row vh-100 align-items-center">      
+            <div class="d-flex col-12 col-lg-6 justify-content-center mb-3 mb-lg-0">
+                <img class="imagenPortada imagenPortada col-12 col-lg-5 border border-primary border-5 rounded" src="{{ url_for('static', filename = 'img/metroid.png')}}" >            
+            </div>      
+            <div class = "col-12 col-lg-6" >
+                <div class= "row align-items-center justify-content-center">
+                <h1 class="display-3 text-center border-bottom mb-2"> Game Collector</h1>    
+                <h4 class="text-center py-3 mb-2"> Game Collector es una app que te permite guardar y consultar información de tus videojuegos favoritos </h4>
 
-        <div class = "container_element">
-            <h1> Game Collector</h1>    
-            <h4> Game Collector es una app que te permite guardar y consultar información de tus videojuegos favoritos </h4>
-
-            <form action="login">
-                <button type="submit" class="btn btn-primary btn-block btn-large">  Iniciar sesión </button>
-            </form>
-            <form action="register">
-                <button type="submit"class="btn btn-primary btn-block btn-large"> Registrarse </button>      
-            </form>
+                <button onclick="login()" class="btn btn-outline-primary mb-3">  Iniciar sesión </button>
+                
+                <button onclick="register()" class="btn btn-outline-primary"> Registrarse </button>      
+                </div>
+            </div>
         </div>
     </div>
     

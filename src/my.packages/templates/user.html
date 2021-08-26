@@ -1,27 +1,33 @@
 {% extends 'base/base.html' %}
 
-{% block titulo %}
-    <link rel="stylesheet" type = "text/css" href = "{{ url_for('static', filename='css/styleuser.css') }}">
+{% block titulo %}    
     <title id = titulo> Mis colecciones </title> 
 {% endblock %}
 
-{% block content%}    
-    
-    <div id=container>
-        <h1> Bienvenido(a) {{usuario}} </h1>
-        <form action="{{usuario}}/crearColeccion">
-            <input type="submit" value="Crear coleccion">
-        </form>
-        
-        <form action="/logout">
-            <input type="submit" value="Salir de mi cuenta">
-        </form>    
+{% block content%}        
+    <div class="container marginContainer text-white">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center border-bottom pb-1"> Bienvenido(a) {{usuario}} </h1>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center border-bottom py-2 mb-3">
+            <div class="me-3" >                
+                <button type="button" onclick="crearColeccion('{{usuario}}')" class="btn btn-outline-primary">
+                Crear colección
+                </button>
+            </div>            
+            <div class="mb-3">                
+                <button type="button" onclick="salirCuenta()" class="btn btn-outline-primary">
+                    Salir de la cuenta
+                </button>
+            </div>
+        </div>        
         
         {% from "_macro.html" import show_collection %}
-
         
         {{ show_collection(listaX, usuario) }}        
-
+        
     </div>
     
 

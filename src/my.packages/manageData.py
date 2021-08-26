@@ -2,7 +2,7 @@ import sys,os,pathlib
 from pathlib import Path
 
 base_path = Path(__file__).parent.parent.parent
-database_path = os.path.join(base_path, '.\\data' )
+database_path = os.path.join(base_path, './data' )
 
 import json
 import DataStructures
@@ -13,30 +13,51 @@ import csv
 # start = time.time()
 
 def cargarBaseJuegos(tipo):
-    with open(database_path + '\\game_info.csv', newline="" , encoding='utf-8') as csvfile:
-        csvTodosLosJuegos = csv.reader(csvfile, delimiter=',')
-        next(csvTodosLosJuegos)
-        if(tipo == "linked"):
-            todosLosJuegos = DataStructures.LinkedList()        
-            for row in csvTodosLosJuegos:
-                juego = DataStructures.Array_Dinamic()
-                for campo in row:
-                    juego.pushBack(campo)
-                todosLosJuegos.pushBack(juego)  
+    try:
+        with open(database_path + '/game_info.csv', newline="" , encoding='utf-8') as csvfile:
+            csvTodosLosJuegos = csv.reader(csvfile, delimiter=',')
+            next(csvTodosLosJuegos)
+            if(tipo == "linked"):
+                todosLosJuegos = DataStructures.LinkedList()        
+                for row in csvTodosLosJuegos:
+                    juego = DataStructures.Array_Dinamic()
+                    for campo in row:
+                        juego.pushBack(campo)
+                    todosLosJuegos.pushBack(juego)  
+                
             
-        
-        elif(tipo == "dynamic"):
-            todosLosJuegos = DataStructures.Array_Dinamic()
-            for row in csvTodosLosJuegos:
-                juego = DataStructures.Array_Dinamic()
-                for campo in row:
-                    juego.pushBack(campo)
-                todosLosJuegos.pushBack(juego)   
+            elif(tipo == "dynamic"):
+                todosLosJuegos = DataStructures.Array_Dinamic()
+                for row in csvTodosLosJuegos:
+                    juego = DataStructures.Array_Dinamic()
+                    for campo in row:
+                        juego.pushBack(campo)
+                    todosLosJuegos.pushBack(juego)   
+    except:
+        with open(database_path + '\\game_info.csv', newline="" , encoding='utf-8') as csvfile:
+            csvTodosLosJuegos = csv.reader(csvfile, delimiter=',')
+            next(csvTodosLosJuegos)
+            if(tipo == "linked"):
+                todosLosJuegos = DataStructures.LinkedList()        
+                for row in csvTodosLosJuegos:
+                    juego = DataStructures.Array_Dinamic()
+                    for campo in row:
+                        juego.pushBack(campo)
+                    todosLosJuegos.pushBack(juego)  
+                
+            
+            elif(tipo == "dynamic"):
+                todosLosJuegos = DataStructures.Array_Dinamic()
+                for row in csvTodosLosJuegos:
+                    juego = DataStructures.Array_Dinamic()
+                    for campo in row:
+                        juego.pushBack(campo)
+                    todosLosJuegos.pushBack(juego)   
 
     return todosLosJuegos
 
 def cargarUsuarios(total , tipo):
-    with open(database_path + '\\users.csv', newline="" , encoding='utf-8') as csvfile:
+    with open(database_path + '/users.csv', newline="" , encoding='utf-8') as csvfile:
         coleccionUsuarios = csv.reader(csvfile, delimiter=',')        
 
         if(tipo == "linked"):
@@ -86,21 +107,21 @@ def agregarUsuarioEnEstructura(tipo, estructura, user, password):
     
 
 def escribirUsuarioCSV(estructura):
-    with open(database_path + "\\users.csv" , "w" , newline="") as outfile:
+    with open(database_path + "/users.csv" , "w" , newline="") as outfile:
         writer = csv.writer(outfile)
         for elemento in estructura:            
             writer.writerow(elemento)
 
 
 def escribirUsuarioJson(usuario):
-    with open(database_path + "\\listasDeLosUsuarios.txt") as json_listas:
+    with open(database_path + "/listasDeLosUsuarios.txt") as json_listas:
         listasDeUsuarios = json.load(json_listas)
         listasDeUsuarios[usuario] = {}
-    with open(database_path + "\\listasDeLosUsuarios.txt" , "w") as outfile:
+    with open(database_path + "/listasDeLosUsuarios.txt" , "w") as outfile:
         json.dump(listasDeUsuarios, outfile)
 
 def recuperarListaUsuario(usuario, tipo):
-    with open(database_path + "\\listasDeLosUsuarios.txt") as json_listas:
+    with open(database_path + "/listasDeLosUsuarios.txt") as json_listas:
         listasDeUsuarios = json.load(json_listas)
     if( tipo == "linked"):
         colecciones = DataStructures.LinkedList()
@@ -114,16 +135,16 @@ def recuperarListaUsuario(usuario, tipo):
     return colecciones
 
 def crearListaEnUsuario(usuario, nombreLista):
-    with open(database_path + "\\listasDeLosUsuarios.txt") as json_listas:
+    with open(database_path + "/listasDeLosUsuarios.txt") as json_listas:
         listasDeUsuarios = json.load(json_listas)
     listasDeUsuarios[usuario][nombreLista] = []
 
-    with open(database_path + "\\listasDeLosUsuarios.txt", "w") as outfile:
+    with open(database_path + "/listasDeLosUsuarios.txt", "w") as outfile:
         json.dump(listasDeUsuarios, outfile)
 
     
 def getContenidosLista(usuario, nom_lista, tipo):
-    with open(database_path + "\\listasDeLosUsuarios.txt") as json_listas:
+    with open(database_path + "/listasDeLosUsuarios.txt") as json_listas:
         listasDeUsuarios = json.load(json_listas)
         contenidos = listasDeUsuarios[usuario][nom_lista]
 
@@ -139,7 +160,7 @@ def getContenidosLista(usuario, nom_lista, tipo):
     return colecciones
 
 def escribirContenidosLista(usuario, nom_lista, slug, agregar):
-    with open(database_path + "\\listasDeLosUsuarios.txt") as json_listas:
+    with open(database_path + "/listasDeLosUsuarios.txt") as json_listas:
         listasDeUsuarios = json.load(json_listas)
         contenidos = listasDeUsuarios[usuario][nom_lista]
 
@@ -148,7 +169,7 @@ def escribirContenidosLista(usuario, nom_lista, slug, agregar):
     elif slug not in contenidos and agregar == True:
         contenidos.append(slug) 
 
-    with open(database_path + "\\listasDeLosUsuarios.txt", "w") as outfile:
+    with open(database_path + "/listasDeLosUsuarios.txt", "w") as outfile:
         json.dump(listasDeUsuarios, outfile)
     
 
@@ -161,14 +182,14 @@ def gameInCollection(nombre_juego, todosLosJuegos):
     return game
 
 def actualizarListasEnJSON(usuario, colecciones):
-    with open(database_path + "\\listasDeLosUsuarios.txt") as json_listas:
+    with open(database_path + "/listasDeLosUsuarios.txt") as json_listas:
         listasDeUsuarios = json.load(json_listas)
     for lista in listasDeUsuarios[usuario]:
         if colecciones.find(lista) == -1:
             del listasDeUsuarios[usuario][lista]
             break
     
-    with open(database_path + "\\listasDeLosUsuarios.txt", "w") as outfile:
+    with open(database_path + "/listasDeLosUsuarios.txt", "w") as outfile:
         json.dump(listasDeUsuarios, outfile)
 
 def searchGame(nombre, juegos, tipo):

@@ -47,29 +47,22 @@
 
 {% block content%}    
     
-    <div id=container>
+    <div class="container marginContainer text-white">
+        <div class="row ">
+            <div class="col-12">
+                <h1 class="text-center border-bottom pb-1"> Estás viendo los contenidos de la colección: {{nombre}}  </h1>
+            </div>
+        </div>       
         
-        <h1> Estás viendo los contenidos de la colección: {{nombre}} </h1>
+        <div class="d-flex justify-content-center border-bottom pt-2 pb-3 mb-3">
+            <button type="button" onclick="sortList(true)" class="btn btn-outline-primary me-3"> Ordenar lista (Ascendente) </button> 
+            <button type="button" onclick="sortList(false)" class="btn btn-outline-primary mx-3"> Ordenar lista (Descendente) </button>  
+            <button type="button" onclick="buscarJuego('{{nombreUser}}','{{nombre}}')" class="btn btn-outline-primary mx-3"> Buscar juego </button> 
+            <button type="button" onclick="eliminar_coleccion('{{nombreUser}}','{{nombre}}')" class="btn btn-outline-primary mx-3"> Eliminar colección </button> 
+            <button type="button" onclick="getBack()" class="btn btn-outline-primary ms-3"> Volver </button>
+        </div>  
 
-        <button onclick="sortList(true)" class="btn btn-primary btn-block btn-large"> Ordenar lista (Ascendente) </button> 
-
-        <button onclick="sortList(false)" class="btn btn-primary btn-block btn-large"> Ordenar lista (Descendente) </button>   
-
-        <form action="/{{nombreUser}}/{{nombre}}/search">
-            <button type="submit" class="btn btn-primary btn-block btn-large"> Buscar juego </button>      
-        </form>
-
-        <form action="/{{nombreUser}}/{{nombre}}/eliminar_coleccion">
-            <button type="submit" class="btn btn-primary btn-block btn-large"> Eliminar colección </button>      
-        </form>
-
-        <button onclick="getBack()"> Volver </button>
-
-        
-
-        
         {% from "_macro.html" import show_game %}
-
         
         {{ show_game(listaX,nombreUser,nombre, nombreJuegos)   }}        
 

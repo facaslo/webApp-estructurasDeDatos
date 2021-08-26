@@ -2,7 +2,7 @@ import sys,os,pathlib
 from pathlib import Path
 
 base_path = Path(__file__).parent.parent.parent
-flask_path = os.path.join(base_path, '.\\lib\\Flask-1.1.2\\src' )
+flask_path = os.path.join(base_path, './lib/Flask-1.1.2/src' )
 sys.path.append(flask_path)
 
 from flask import Flask
@@ -26,6 +26,7 @@ import csv
 app = Flask(__name__, template_folder='templates')
 app.secret_key = "llave"
 
+#Tipo de estructura de datos
 tipo = "dynamic"
 juegos = manageData.cargarBaseJuegos(tipo)  
 usuarios = manageData.cargarUsuarios(5000, tipo)
@@ -126,8 +127,6 @@ def crearColeccion(id):
     else:
         return render_template('401.html'), 401
     
-
-
 @app.route('/<id>/<lista>' , methods = ['GET','POST'])
 def coleccionJuegos(id, lista):    
     juego = request.args.get("juego", "")         
@@ -211,7 +210,5 @@ def eliminarJuego(id, lista, slug_juego):
     else:
         return render_template('401.html'), 401 
 
-
 if __name__ == '__main__' :
     app.run(debug = True, port = 8000)
-

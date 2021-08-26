@@ -18,19 +18,19 @@
 {% endmacro %}
 
 {% macro show_collection(coleccion,usuario) %}
-    <ol id="lista">
-        {% for elemento in coleccion %}
-            <li> <a href="/{{usuario}}/{{elemento}}"> {{elemento}} </a> </li>
+    <div class="list-group" >
+        {% for elemento in coleccion %}        
+            <a href="/{{usuario}}/{{elemento}}" class="list-group-item list-group-item-action"> {{elemento}} </a> 
         {% endfor %}
-    </ol>
+    </div>
 {% endmacro %}
 
 {% macro show_game(coleccion, usuario , nombre_coleccion, nombresElementos)%}
-    <ol id="lista">
-        {% for elemento in coleccion %}
-            <li> <a href="/{{usuario}}/{{nombre_coleccion}}?juego={{elemento}}"> {{ nombresElementos.getElement(loop.index0) }} </a> </li>
+    <div class="list-group" >
+        {% for elemento in coleccion %}        
+            <a href="/{{usuario}}/{{nombre_coleccion}}?juego={{elemento}}" class="list-group-item list-group-item-action"> {{ nombresElementos.getElement(loop.index0) }}</a> 
         {% endfor %}
-    </ol>
+    </div>    
 {% endmacro %}
 
 {% macro show_results(resultados, id, nombreLista) %}

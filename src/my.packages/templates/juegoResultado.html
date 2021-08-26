@@ -1,7 +1,6 @@
 {% extends 'base/base.html' %}
 
-{% block titulo %}
-    <link rel="stylesheet" type = "text/css" href = "{{ url_for('static', filename='css/styleuser.css') }}">
+{% block titulo %}        
     <title id = titulo> {{nombre_Juego}} </title> 
     <script> 
         const urlBack = "/{{id}}/{{nombre_lista}}/search?";
@@ -13,35 +12,40 @@
         function addGame(){            
             window.location.href = urlJuegoAgregado;
         } 
-    </script>
-
-    
+    </script>    
 {% endblock %}
 
 {% block content%}    
     
-    <div id=container>
+    <div class="container marginContainer text-white">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center border-bottom pb-1"> Información de {{info_juego.getElement(0)}} </h1>
+            </div>
+        </div>
+        
+        <div class="d-flex justify-content-center border-bottom pt-2 mb-3">     
+            <div class="me-3">
+                <button onclick="addGame()" class="btn btn-outline-primary"> Agregar a mi lista </button>           
+            </div>            
+            <div class="mb-3">
+                <button onclick="getBack()" class="btn btn-outline-primary"> Volver </button>      
+            </div>
+        </div>
 
-        
-        
-        <button onclick="addGame()" class="btn btn-primary btn-block btn-large"> Agregar a mi lista </button>      
-        
-        
-        <button onclick="getBack()" class="btn btn-primary btn-block btn-large"> Volver </button>      
-           
-
-        <ol>
-            <li> Nombre:{{info_juego.getElement(0)}} </li>
-            <li> Fecha de lanzamiento :{{info_juego.getElement(2)}} </li>
-            <li> Puntaje en metacritic:{{info_juego.getElement(3)}} </li>
-            <li> Página web:{{info_juego.getElement(4)}} </li>
-            <li> Plataformas:{{info_juego.getElement(5)}} </li> 
-            <li> Desarrolladoras:{{info_juego.getElement(6)}} </li>
-            <li> Géneros:{{info_juego.getElement(7)}} </li>
-            <li> Distribuidora:{{info_juego.getElement(8)}} </li>
-            <li> Rating Esrb:{{info_juego.getElement(9)}} </li>
-        </ol>
-
+        <div class="row">
+            <ul class="col-12 justify-content-center">
+                <li> Nombre : {{info_juego.getElement(0)}} </li>
+                <li> Fecha de lanzamiento : {{info_juego.getElement(2)}} </li>
+                <li> Puntaje en metacritic : {{info_juego.getElement(3)}} </li>
+                <li> Página web : {{info_juego.getElement(4)}} </li>
+                <li> Plataformas : {{info_juego.getElement(5)}} </li> 
+                <li> Desarrolladoras : {{info_juego.getElement(6)}} </li>
+                <li> Géneros : {{info_juego.getElement(7)}} </li>
+                <li> Distribuidora : {{info_juego.getElement(8)}} </li>
+                <li> Rating Esrb : {{info_juego.getElement(9)}} </li>
+            </ol>
+        </div>
             
                
         

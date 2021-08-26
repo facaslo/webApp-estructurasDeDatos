@@ -8,9 +8,11 @@
         if ("{{mensaje}}" != "")
             alert( "{{mensaje}}" );
     </script>
+    <link rel="stylesheet" type = "text/css" href = "{{ url_for('static', filename='css/custom.css') }}">
+    <script defer src="{{ url_for('static', filename='javascript/funcionesFront.js') }}"></script>
     {%block titulo%} {% endblock %}
 </head>
-<body>
+<body class="fondo">
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             <ul>
