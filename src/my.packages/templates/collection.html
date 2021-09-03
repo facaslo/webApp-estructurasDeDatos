@@ -54,12 +54,12 @@
             </div>
         </div>       
         
-        <div class="d-flex justify-content-center border-bottom pt-2 pb-3 mb-3">
-            <button type="button" onclick="sortList(true)" class="btn btn-outline-primary me-3"> Ordenar lista (Ascendente) </button> 
-            <button type="button" onclick="sortList(false)" class="btn btn-outline-primary mx-3"> Ordenar lista (Descendente) </button>  
-            <button type="button" onclick="buscarJuego('{{nombreUser}}','{{nombre}}')" class="btn btn-outline-primary mx-3"> Buscar juego </button> 
-            <button type="button" onclick="eliminar_coleccion('{{nombreUser}}','{{nombre}}')" class="btn btn-outline-primary mx-3"> Eliminar colección </button> 
-            <button type="button" onclick="getBack()" class="btn btn-outline-primary ms-3"> Volver </button>
+        <div class="row d-flex justify-content-center border-bottom pt-2 pb-3 mb-3">
+            <button type="button" onclick="sortList(true)" class="col-3 btn btn-outline-primary me-3"> Ordenar lista (Ascendente) </button> 
+            <button type="button" onclick="sortList(false)" class="col-3 btn btn-outline-primary mx-3"> Ordenar lista (Descendente) </button>  
+            <button type="button" onclick="buscarJuego('{{nombreUser}}','{{nombre}}')" class="col-3 btn btn-outline-primary mx-3"> Buscar juego </button> 
+            <button type="button" onclick="eliminar_coleccion('{{nombreUser}}','{{nombre}}')" class="col-3 btn btn-outline-primary mx-3"> Eliminar colección </button> 
+            <button type="button" onclick="getBack()" class="col-3 btn btn-outline-primary ms-3"> Volver </button>
         </div>  
 
         {% from "_macro.html" import show_game %}

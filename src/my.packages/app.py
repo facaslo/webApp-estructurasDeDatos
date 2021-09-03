@@ -1,9 +1,5 @@
-import sys,os,pathlib
-from pathlib import Path
-
-base_path = Path(__file__).parent.parent.parent
-flask_path = os.path.join(base_path, './lib/Flask-1.1.2/src' )
-sys.path.append(flask_path)
+import loadModules as lm
+lm.loadModuleFlask()
 
 from flask import Flask
 from flask import redirect
@@ -20,8 +16,7 @@ import registerForm as rf
 import createCollectionForm as cf
 import searchForm as sf
 import manageData 
-import DataStructures
-import csv
+import SequentialStructures
 
 app = Flask(__name__, template_folder='templates')
 app.secret_key = "llave"
@@ -134,9 +129,9 @@ def coleccionJuegos(id, lista):
     coleccion = manageData.getContenidosLista(id,lista, tipo)
 
     if tipo == "linked":
-        nombresColeccion = DataStructures.LinkedList()
+        nombresColeccion = SequentialStructures.LinkedList()
     elif tipo == "dynamic":
-        nombresColeccion = DataStructures.Array_Dinamic()   
+        nombresColeccion = SequentialStructures.Array_Dinamic()   
 
     for elemento in coleccion:
         nombresColeccion.pushBack(manageData.gameInCollection(elemento, juegos).getElement(0))   
@@ -189,7 +184,6 @@ def Juego(id, lista, slug_juego):
             if elemento.getElement(1) == slug_juego:
                 juego = elemento
         return render_template("juegoResultado.html", info_juego = juego, id=id , nombre_lista=lista, slug=slug_juego)
-
         
     else:
         return render_template('401.html'), 401 
