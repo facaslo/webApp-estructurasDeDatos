@@ -194,18 +194,32 @@ def searchGame(nombre, juegos, tipo):
     elif( tipo == "dynamic"):
         resultado = SequentialStructures.Array_Dinamic()
 
+
+    #UTILIZANDO SORTED INSERTION
     #for juego in juegos:
     #    if nombre.lower() in juego.getElement(0).lower():
     #        resultado.sortedInsertion(juego)
     
-    heap = TreeStructures.BinaryHeap()
 
+    #UTILIZANDO BINARY HEAPS
+    #heap = TreeStructures.BinaryHeap()
+
+    #for juego in juegos:
+    #    if nombre.lower() in juego.getElement(0).lower():
+    #        heap.insert(juego)
+
+    #while heap.size >= 0:
+    #    resultado.pushFront(heap.extractMax())
+    
+
+    #UTILIZANDO AVL
+    avltree = TreeStructures.AVL()
+    root = None
     for juego in juegos:
         if nombre.lower() in juego.getElement(0).lower():
-            heap.insert(juego)
+            root = avltree.insert(root, juego)
 
-    while heap.size >= 0:
-        resultado.pushFront(heap.extractMax())
-    
+    avltree.inOrderReturn(resultado, root)
+
     return resultado
 
