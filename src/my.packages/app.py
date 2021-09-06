@@ -5,13 +5,8 @@ from flask import Flask
 from flask import redirect
 from flask import render_template 
 from flask import request
-from flask import make_response
 from flask import session
 from flask import redirect
-from flask import url_for
-from flask import flash
-
-
 
 import loginForm as lf
 import registerForm as rf
@@ -31,7 +26,7 @@ totalUsuarios = 100000
 # Límite de juegos para cargar en la base
 limiteJuegos = 700000
 # Parámetros para saber como lidiar con las colecciones de la tabla hash de usuarios
-tipoSondeo = "quadraticProbing"
+tipoSondeo = "linearProbing"
 encadenamiento = False
 # Arreglo dinámico ordenado por un heap o avl, que contendrá la información de los juegos
 baseJuegos = None
@@ -39,9 +34,6 @@ baseJuegos = None
 usuarios = None
 # Lista enlazada que contendrá los nombres de las colecciones de juegos
 colecciones = None
-# Para autenticar usuarios y que solo puedan acceder a sus propias cuentas
-autentication = False  
-
 
 @app.errorhandler(404)
 def page_not_found(e):
@@ -80,8 +72,7 @@ def login():
             
             global colecciones
             colecciones = manageData.recuperarListaUsuario(username) 
-            global autentication 
-            autentication = True            
+            session["autentication"] = True                     
             
             return redirect('/user?id={}'.format(username), code=302)    
         else:
@@ -94,8 +85,8 @@ def login():
 def logout():    
     if 'username' in session:
         session.pop('username')
-        global autentication
-        autentication = False
+        session.pop('autentication')   
+
         global colecciones
         colecciones = None
     return redirect('/')
@@ -133,10 +124,10 @@ def usuario():
     userParametro = request.args.get('id')       
     
     #Autenticar el usuario
-    if autentication and userParametro == session['username']: 
-        # Limpiar la lista de usuarios de la memoria
+    if session["autentication"] and userParametro == session['username']: 
+        # Limpiar la tabla hash de usuarios de la memoria
         global usuarios
-        usuarios = None        
+        usuarios = None       
 
         return render_template('user.html', usuario = userParametro , listaX = colecciones)        
     else:
@@ -144,12 +135,12 @@ def usuario():
 
 @app.route('/<id>/crearColeccion' , methods = ['GET','POST'])
 def crearColeccion(id):   
-
+    
     # Formulario para crear colección
     form = cf.CreateCollecion (request.form)       
     crearColeccionMessage = request.args.get("message", "") 
     
-    if autentication and id == session['username']:
+    if session["autentication"] and id == session['username']:
         if request.method == 'POST' and form.validate():            
             if colecciones.empty():
                 colecciones.pushBack(form.nombreColeccion.data)
@@ -182,7 +173,7 @@ def coleccionJuegos(id, lista):
     for elemento in coleccion:
         nombresColeccion.pushBack(manageData.gameInCollection(elemento, baseJuegos).getElement(0))   
     
-    if autentication and id == session['username']:        
+    if session["autentication"] and id == session['username']:        
         if juego == "":            
             return render_template('collection.html',  listaX = coleccion, nombre= lista , nombreUser = id , nombreJuegos = nombresColeccion)
         else:             
@@ -195,25 +186,26 @@ def coleccionJuegos(id, lista):
 
 @app.route('/<id>/<lista>/eliminar_coleccion' , methods = ['GET','POST'])
 def eliminar(id, lista):   
-    if autentication and id == session['username']:  
-        isInCollection = colecciones.find(lista)
+    # Autenticar usuario
+    if session["autentication"] and id == session['username']:  
+        # Verificar existencia de la colección y borrarla de existir
+        isInCollection = colecciones.find(lista)         
         if isInCollection != -1:
             colecciones.erase(isInCollection)
             manageData.actualizarListasEnJSON(id,colecciones)
-        return redirect('/user?id={}'.format(id))
-    
+        return redirect('/user?id={}'.format(id))    
     else:
         return render_template('401.html'), 401
-  
+
 @app.route('/<id>/<lista>/search' , methods = ['GET','POST'])
 def buscarJuego(id, lista):
     form = sf.searchForm(request.form)
-    if autentication and id == session['username']:
+    # Autenticar usuario
+    if session["autentication"] and id == session['username']:
+        # Si se llenó el formulario de manera valida
         if request.method == 'POST' and form.validate():
-            busqueda = form.gameName.data
-
-            resultado = manageData.searchGame(busqueda , baseJuegos, tipoArbol)                  
-
+            busqueda = form.gameName.data            
+            resultado = manageData.searchGame(busqueda , baseJuegos)                  
             return render_template('search.html' , form = form, resultados=resultado, id= id, nombreLista = lista)
         else:
             return render_template('search.html', form = form)
@@ -222,8 +214,9 @@ def buscarJuego(id, lista):
 
 @app.route('/<id>/<lista>/search/<slug_juego>' , methods = ['GET','POST'])
 def Juego(id, lista, slug_juego): 
-    
-    if autentication and id == session['username']: 
+    # Autenticar usuario
+    if session["autentication"] and id == session['username']:         
+        # Obtener la información del juego
         for elemento in baseJuegos:
             if elemento.getElement(1) == slug_juego:
                 juego = elemento
@@ -234,7 +227,8 @@ def Juego(id, lista, slug_juego):
 
 @app.route('/<id>/<lista>/search/<slug_juego>/agregarJuego' , methods = ['GET','POST'])
 def agregarJuego(id, lista, slug_juego): 
-    if autentication and id == session['username']: 
+    # Autenticar usuario
+    if session["autentication"] and id == session['username']: 
         manageData.escribirContenidosLista(id,lista, slug_juego, True)
         return redirect('/{}/{}'.format(id,lista))
     else:
@@ -242,7 +236,8 @@ def agregarJuego(id, lista, slug_juego):
 
 @app.route('/<id>/<lista>/<slug_juego>/eliminarJuego' , methods = ['GET','POST'])
 def eliminarJuego(id, lista, slug_juego): 
-    if autentication and id == session['username']: 
+    # Autenticar usuario
+    if session["autentication"] and id == session['username']: 
         manageData.escribirContenidosLista(id,lista, slug_juego, False)
         return redirect('/{}/{}'.format(id,lista))
     else:

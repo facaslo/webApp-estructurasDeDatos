@@ -140,8 +140,7 @@ def cargarBaseJuegos(tipoArbol, totalJuegos):
         elif tipoArbol == "avl":
             print("Agregando juegos al AVL ...")
             avltree = TreeStructures.AVL()
-            root = None
-            
+            root = None            
 
             for row in csvTodosLosJuegos:                         
                 if juegosAgregados == totalJuegos:
@@ -236,8 +235,6 @@ def gameInCollection(nombre_juego, todosLosJuegos):
             break
     return game
 
-
-
 # Usaremos divideAndConquer para hacer una busqueda de múltiples elementos que comiencen por value
 def divideAndConquer(dynamicArray, value):    
     print("Buscando juegos ...")
@@ -266,7 +263,7 @@ def divideAndConquer(dynamicArray, value):
 
     if not resultado.IsEmpty():
         # Buscar hacia atrás del resultado encontrado
-        while index > 0:
+        while index >= 0:
             index -= 1            
             elemento = dynamicArray.getElement(index)
             if not elemento.getElement(0).lower().startswith(value.lower()):
@@ -284,50 +281,12 @@ def divideAndConquer(dynamicArray, value):
             else:
                 resultado.pushBack(elemento)
 
-    print("Juegos encontrados.")
-    resultado.printArray()
-    return resultado
-        
+    print("Juegos encontrados.")    
+    return resultado      
 
 
-def searchGame(cadenaBusqueda, baseJuegos , tipo = "heap"):    
+def searchGame(cadenaBusqueda, baseJuegos):        
+    return divideAndConquer(baseJuegos, cadenaBusqueda)   
+
     
-    
-    # Divide and conquer 
-    resultado = divideAndConquer(baseJuegos, cadenaBusqueda)
-
-
-
-    # Divide and conquer    
-    #UTILIZANDO SORTED INSERTION
-    #for juego in juegos:
-    #    if nombre.lower() in juego.getElement(0).lower():
-    #        resultado.sortedInsertion(juego)
-    
-
-    #UTILIZANDO BINARY HEAPS
-    # heap = TreeStructures.BinaryHeap()
-
-    # for juego in juegos:
-    #    if nombre.lower() in juego.getElement(0).lower():
-    #        heap.insert(juego)
-
-    # while heap.size >= 0:
-    #    resultado.pushFront(heap.extractMax())
-    
-
-    #UTILIZANDO AVL
-    # avltree = TreeStructures.AVL()
-    # root = None
-    # for juego in juegos:
-    #     if nombre.lower() in juego.getElement(0).lower():
-    #         root = avltree.insert(root, juego)
-
-    # avltree.inOrderReturn(resultado, root)
-
-    # file = open("./resultado.txt" , "w") 
-    # for elemento in resultado:
-    #     file.write(elemento.getElement(0)+"\n")
-
-    return resultado
 

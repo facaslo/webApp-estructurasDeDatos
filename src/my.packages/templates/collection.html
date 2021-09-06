@@ -1,16 +1,16 @@
 {% extends 'base/base.html' %}
 
-{% block titulo %}
-    <link rel="stylesheet" type = "text/css" href = "{{ url_for('static', filename='css/styleuser.css') }}">
+{% block titulo %}    
     <title id = titulo> {{nombre}} </title> 
     <script defer>
         function sortList(ascending){
+            console.log("Funciona")
             var list, i, switching, b, shouldSwitch;
             list = document.getElementById("lista");
             switching = true;
             while (switching) {
                 switching = false;
-                b = list.getElementsByTagName("LI");
+                b = document.getElementsByClassName("list-group-item");
                 console.log(b.innerText)
                 for (i = 0; i < (b.length - 1); i++) {
                 shouldSwitch = false;
@@ -55,11 +55,22 @@
         </div>       
         
         <div class="row d-flex justify-content-center border-bottom pt-2 pb-3 mb-3">
-            <button type="button" onclick="sortList(true)" class="col-3 btn btn-outline-primary me-3"> Ordenar lista (Ascendente) </button> 
-            <button type="button" onclick="sortList(false)" class="col-3 btn btn-outline-primary mx-3"> Ordenar lista (Descendente) </button>  
-            <button type="button" onclick="buscarJuego('{{nombreUser}}','{{nombre}}')" class="col-3 btn btn-outline-primary mx-3"> Buscar juego </button> 
-            <button type="button" onclick="eliminar_coleccion('{{nombreUser}}','{{nombre}}')" class="col-3 btn btn-outline-primary mx-3"> Eliminar colección </button> 
-            <button type="button" onclick="getBack()" class="col-3 btn btn-outline-primary ms-3"> Volver </button>
+            <div class="col-lg-3 m-1 d-flex">
+                <button type="button" onclick="sortList(true)" class="flex-fill btn btn-outline-primary"> Ordenar lista (Ascendente) </button> 
+            </div>
+            <div class="col-lg-3 m-1 d-flex">
+                <button type="button" onclick="sortList(false)" class="flex-fill btn btn-outline-primary"> Ordenar lista (Descendente) </button>  
+            </div>
+            <div class="col-lg-3  m-1 d-flex">
+                <button type="button" onclick="buscarJuego('{{nombreUser}}','{{nombre}}')" class="flex-fill btn btn-outline-primary"> Buscar juego </button> 
+            </div>
+            <div class="col-lg-3  m-1 d-flex">
+                <button type="button" onclick="eliminar_coleccion('{{nombreUser}}','{{nombre}}')" class="flex-fill btn btn-outline-primary m3"> Eliminar colección </button> 
+            </div>            
+            <div class="col-lg-3 m-1 d-flex">
+                <button type="button" onclick="getBack()" class="flex-fill btn btn-outline-primary"> Volver </button>
+            </div>   
+                      
         </div>  
 
         {% from "_macro.html" import show_game %}

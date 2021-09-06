@@ -75,11 +75,11 @@ class LinkedList:
     def find(self, data):
         self.copy = self.head
         self.index = 0
-        while(self.copy != None):
-            self.index += 1
+        while(self.copy != None):            
             if self.copy.data == data:
                 return self.index
             self.copy = self.copy.next
+            self.index += 1
         return -1
 
     def erase(self, index):
