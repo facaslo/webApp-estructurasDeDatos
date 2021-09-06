@@ -321,6 +321,9 @@ class Array_Dinamic():
         while self.size() > 0 :
             self.erase(0)
     
+    def IsEmpty(self):
+        return self.Size == 0
+
     def find(self, data):
         for i in range(self.Size):
             if data == self.getElement(i):
@@ -413,9 +416,8 @@ class Array_Dinamic():
                         break
                 for i in range(self.size()-2, index-1, -1):
                     self.Arr[i+1] = self.Arr[i]
-                self.Arr[index] = value       
-                
-
+                self.Arr[index] = value                     
+    
 
 
             

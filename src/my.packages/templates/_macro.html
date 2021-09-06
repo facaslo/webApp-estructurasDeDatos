@@ -20,7 +20,7 @@
 {% macro show_collection(coleccion,usuario) %}
     <div class="list-group" >
         {% for elemento in coleccion %}        
-            <a href="/{{usuario}}/{{elemento}}" class="list-group-item list-group-item-action"> {{elemento}} </a> 
+            <a href="/{{usuario}}/{{elemento.data}}" class="list-group-item list-group-item-action"> {{elemento.data}} </a> 
         {% endfor %}
     </div>
 {% endmacro %}

@@ -23,7 +23,7 @@ with open("response.txt", 'w') as outfile:
 
 #Ejemplo de parseo de json
 diccionarioUsuarios = {}
-total = 5000
+total = 25000
 
 with open(base_path + '\\users.csv', newline="" , encoding='utf-8') as csvfile:    
     csvUsuarios = csv.reader(csvfile, delimiter=',')
