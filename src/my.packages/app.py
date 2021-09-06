@@ -85,7 +85,8 @@ def login():
             
             return redirect('/user?id={}'.format(username), code=302)    
         else:
-            return("Fracaso")                    
+            error = "Usuario o contraseña incorrectos"
+            return redirect('/login?message={}'.format(error))                    
     
     return render_template('login.html', form = form, mensaje = loginMessage)    
 
@@ -149,16 +150,21 @@ def crearColeccion(id):
     crearColeccionMessage = request.args.get("message", "") 
     
     if autentication and id == session['username']:
-        if request.method == 'POST' and form.validate():
-            #Asegurarse de que cada colección sea única
-            for coleccion in colecciones:
-                if form.nombreColeccion.data != coleccion.data:
-                    colecciones.pushBack(form.nombreColeccion.data)
-                    manageData.crearListaEnUsuario(id,form.nombreColeccion.data)
-                    return redirect("/user?id={}".format(id), code=302)
-                else:
-                    mensaje = "La lista ya existe"
-                    return redirect("/{}/crearColeccion?message={}".format(id,mensaje), code=302)
+        if request.method == 'POST' and form.validate():            
+            if colecciones.empty():
+                colecciones.pushBack(form.nombreColeccion.data)
+                manageData.crearListaEnUsuario(id,form.nombreColeccion.data)
+                return redirect("/user?id={}".format(id), code=302)
+            else:
+                #Asegurarse de que cada colección sea única
+                for coleccion in colecciones:
+                    if form.nombreColeccion.data != coleccion.data:                    
+                        colecciones.pushBack(form.nombreColeccion.data)
+                        manageData.crearListaEnUsuario(id,form.nombreColeccion.data)
+                        return redirect("/user?id={}".format(id), code=302)
+                    else:
+                        mensaje = "La lista ya existe"
+                        return redirect("/{}/crearColeccion?message={}".format(id,mensaje), code=302)
         
         return render_template('createCollection.html', form = form, mensaje = crearColeccionMessage, id = id)
     else:
