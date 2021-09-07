@@ -130,21 +130,16 @@ def cargarBaseJuegos(tipoArbol, totalJuegos):
                 juego = SequentialStructures.Array_Dinamic()
                 for campo in row:
                     juego.pushBack(campo)
-                heap.insert(juego)                
-                #heapq.heappush(heap2, juego)
+                heap.insert(juego)               
+                
                 juegosAgregados += 1
                                
             
             print("Ordenando los juegos con heap sort...")
 
             while heap.size >= 0:
-                todosLosJuegos.pushFront(heap.extractMax())   
-
-            # while True:
-            #     try:
-            #         todosLosJuegos.pushBack(heapq.heappop(heap2))
-            #     except:
-            #         break
+                todosLosJuegos.pushFront(heap.extractMax()) 
+            
             
         elif tipoArbol == "avl":
             print("Agregando juegos al AVL ...")

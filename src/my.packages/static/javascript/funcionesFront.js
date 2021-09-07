@@ -1,25 +1,24 @@
 function crearColeccion(usuario){
-    window.location.href = `${usuario}/crearColeccion`
+    window.location.href = `${usuario}/crearColeccion`;
 }
 
 function salirCuenta(){
-    window.location.href = "/logout"
+    window.location.href = "/logout";
 }
 
 function buscarJuego(nombreUser, nombre){
-    window.location.href = `/${nombreUser}/${nombre}/search`
+    window.location.href = `/${nombreUser}/${nombre}/search`;
 }
 
 function eliminar_coleccion(nombreUser, nombre) {
-    console.log("Borrado")
-    window.confirm("¿Desea borrar esta colección?")
-    window.location.href = `/${nombreUser}/${nombre}/eliminar_coleccion`    
+    if (window.confirm("¿Desea borrar esta colección?") == true)
+    window.location.href = `/${nombreUser}/${nombre}/eliminar_coleccion`;
 }
 
 function login(){
-    window.location.href = '/login'
+    window.location.href = '/login';
 }
 
 function register(){
-    window.location.href = '/register'
+    window.location.href = '/register';
 }

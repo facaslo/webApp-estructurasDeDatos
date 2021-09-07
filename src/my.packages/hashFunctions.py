@@ -2,13 +2,13 @@ import ctypes
 import hashlib
 from os import urandom
 
-def rsHash(string, salt = ""):
+def rsHash(string):
     b = 378551
     a = 63689
     hash = 0
     i = 0
 
-    for i in range(len(string+salt)):
+    for i in range(len(string)):
         # Ord regresa el código de unicode
         hash = hash * a + ord(string[i])
         a = a*b
