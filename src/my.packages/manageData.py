@@ -1,5 +1,6 @@
 import sys,os
 import json
+import heapq
 
 from werkzeug import datastructures
 import SequentialStructures
@@ -120,7 +121,8 @@ def cargarBaseJuegos(tipoArbol, totalJuegos):
 
             print("Agregando juegos al heap ...")
             
-            heap = TreeStructures.BinaryHeap()       
+            heap = TreeStructures.BinaryHeap(totalJuegos)             
+            
             
             for row in csvTodosLosJuegos:                            
                 if juegosAgregados == totalJuegos:
@@ -129,6 +131,7 @@ def cargarBaseJuegos(tipoArbol, totalJuegos):
                 for campo in row:
                     juego.pushBack(campo)
                 heap.insert(juego)                
+                #heapq.heappush(heap2, juego)
                 juegosAgregados += 1
                                
             
@@ -136,6 +139,12 @@ def cargarBaseJuegos(tipoArbol, totalJuegos):
 
             while heap.size >= 0:
                 todosLosJuegos.pushFront(heap.extractMax())   
+
+            # while True:
+            #     try:
+            #         todosLosJuegos.pushBack(heapq.heappop(heap2))
+            #     except:
+            #         break
             
         elif tipoArbol == "avl":
             print("Agregando juegos al AVL ...")
@@ -235,8 +244,8 @@ def gameInCollection(nombre_juego, todosLosJuegos):
             break
     return game
 
-# Usaremos divideAndConquer para hacer una busqueda de múltiples elementos que comiencen por value
-def divideAndConquer(dynamicArray, value):    
+# Usaremos binary search para hacer una busqueda de múltiples elementos que comiencen por value
+def binarySearch(dynamicArray, value):    
     print("Buscando juegos ...")
     resultado = SequentialStructures.Array_Dinamic() 
 
@@ -286,7 +295,12 @@ def divideAndConquer(dynamicArray, value):
 
 
 def searchGame(cadenaBusqueda, baseJuegos):        
-    return divideAndConquer(baseJuegos, cadenaBusqueda)   
+    start = time.time()
+    resultado = binarySearch(baseJuegos, cadenaBusqueda)   
+    end=time.time()
+    print("Tiempo de busqueda: {}".format(start-end))
+    return resultado
+
 
     
 

@@ -1,9 +1,9 @@
 from SequentialStructures import Array_Dinamic
 
 class BinaryHeap:
-    def __init__(self):        
+    def __init__(self,size):        
         self.size = -1
-        self.h = Array_Dinamic()       
+        self.h = Array_Dinamic(size+2)       
 
     def IsEmpty(self):
         return self.h.IsEmpty()
@@ -21,9 +21,7 @@ class BinaryHeap:
         while i>0 and self.h.getElement(self.parent(i)).getElement(0).lower() < self.h.getElement(i).getElement(0).lower():
             temp = self.h.getElement(self.parent(i))
             self.h.Set(self.parent(i),self.h.getElement(i))
-            self.h.Set(i,temp)           
-
-            # self.h[self.parent(i)], self.h[i] = self.h[i], self.h[self.parent(i)]
+            self.h.Set(i,temp)
             i = self.parent(i)
 
     def siftDown(self, i):
@@ -201,4 +199,24 @@ class AVL:
         datastructure.pushBack(root.key)
         self.inOrderReturn(datastructure, root.right)
 
+# Elementos heap:
+# a = Array_Dinamic()
+# b = Array_Dinamic()
+# c = Array_Dinamic()
+# a.Append("A")
+# b.Append("C")
+# c.Append("B")
+
+# heap = BinaryHeap()
+# heap.insert(a)
+# heap.insert(b)
+# heap.insert(c)
+
+# for elemento in heap.h:
+#     print(elemento.getElement(0), end="")
+
+# print()
+
+# while heap.size > 0 :
+#     print(heap.extractMax().printArray())
 

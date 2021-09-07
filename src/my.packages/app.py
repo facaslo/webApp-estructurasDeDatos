@@ -24,7 +24,7 @@ tipoArbol = "avl"
 # Total de usuarios para cargar, determina el tamaño de la tabla hash
 totalUsuarios = 100000
 # Límite de juegos para cargar en la base
-limiteJuegos = 700000
+limiteJuegos = 10000
 # Parámetros para saber como lidiar con las colecciones de la tabla hash de usuarios
 tipoSondeo = "linearProbing"
 encadenamiento = False
@@ -40,11 +40,12 @@ def page_not_found(e):
     return render_template("404.html") , 404
 
 @app.route('/')
-def index():     
+def index():         
     # Cargar la base de juegos 
     global baseJuegos
     if baseJuegos is None:
-        baseJuegos = manageData.cargarBaseJuegos(tipoArbol,limiteJuegos)      
+        baseJuegos = manageData.cargarBaseJuegos(tipoArbol,limiteJuegos)
+        
     return render_template('index.html')
 
 @app.route('/login' , methods = ['GET','POST'])

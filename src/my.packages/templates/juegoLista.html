@@ -6,7 +6,8 @@
     
     <script>
          const urlJuegoEliminado = "/{{id}}/{{nombre_lista}}/{{slug}}/eliminarJuego"
-        function removeGame(){            
+        function removeGame(){       
+            window.confirm("¿Desea eliminar este juego de la lista?")     
             window.location.href = urlJuegoEliminado;
         } 
     </script>

@@ -11,7 +11,9 @@ function buscarJuego(nombreUser, nombre){
 }
 
 function eliminar_coleccion(nombreUser, nombre) {
-    window.location.href = `/${nombreUser}/${nombre}/eliminar_coleccion`
+    console.log("Borrado")
+    window.confirm("¿Desea borrar esta colección?")
+    window.location.href = `/${nombreUser}/${nombre}/eliminar_coleccion`    
 }
 
 function login(){
