@@ -24,7 +24,7 @@ tipoArbol = "avl"
 # Total de usuarios para cargar, determina el tamaño de la tabla hash
 totalUsuarios = 100000
 # Límite de juegos para cargar en la base
-limiteJuegos = 10000
+limiteJuegos = 700000
 # Parámetros para saber como lidiar con las colecciones de la tabla hash de usuarios
 tipoSondeo = "linearProbing"
 encadenamiento = False
