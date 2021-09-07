@@ -16,3 +16,11 @@ def loadModuleWTForms():
     else:
         wtforms_path = os.path.join(base_path, '.\\lib' )
     sys.path.insert(0,wtforms_path)
+
+def loadModuleRequests():
+    base_path = Path(__file__).parent.parent.parent
+    if sys.platform.startswith('linux'):
+        wtforms_path = os.path.join(base_path, './lib' )
+    else:
+        wtforms_path = os.path.join(base_path, '.\\lib' )
+    sys.path.insert(0,wtforms_path)

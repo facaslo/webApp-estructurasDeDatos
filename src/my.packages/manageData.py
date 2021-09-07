@@ -1,8 +1,8 @@
 import sys,os
 import json
-import heapq
-
-from werkzeug import datastructures
+import loadModules as lm
+lm.loadModuleRequests()
+import requests
 import SequentialStructures
 import TreeStructures
 import HashTable
@@ -163,7 +163,15 @@ def cargarBaseJuegos(tipoArbol, totalJuegos):
         print("El tiempo tardado en ordenar la base es: {}".format(end-start))
     print("Base de juegos cargada.")
     return todosLosJuegos
-    
+
+# Metodo para obtener la imágen de un juego
+def getImage(slug):
+    apiKey = "f82927e8dbbd48eab7d2b49482f026eb"
+    requestQuery = requests.get("https://api.rawg.io/api/games?key={}&search={}".format(apiKey,slug))
+    response = requestQuery.json() 
+    for resultado in response["results"]:
+        if resultado["slug"] == slug:
+            return resultado["background_image"]
 
 # Metodos para las colecciones de los usuarios.
 

@@ -180,8 +180,10 @@ def coleccionJuegos(id, lista):
         else:             
             infoJuego = manageData.gameInCollection(juego, baseJuegos)          
             if infoJuego == None:    
-                return render_template('404.html'), 404    
-            return render_template("juegoLista.html", info_juego = infoJuego, slug = infoJuego.getElement(1), nombre_Juego = infoJuego.getElement(0), nombre_lista= lista, id=id) 
+                return render_template('404.html'), 404   
+            # Obtener la imagen del juego
+            imagen = manageData.getImage(infoJuego.getElement(1))
+            return render_template("juegoLista.html", info_juego = infoJuego, slug = infoJuego.getElement(1), nombre_Juego = infoJuego.getElement(0), nombre_lista= lista, id=id, img = imagen) 
     else:
         return render_template('401.html'), 401
 
@@ -221,7 +223,9 @@ def Juego(id, lista, slug_juego):
         for elemento in baseJuegos:
             if elemento.getElement(1) == slug_juego:
                 juego = elemento
-        return render_template("juegoResultado.html", info_juego = juego, id=id , nombre_lista=lista, slug=slug_juego)
+                # Obtener la imagen del juego
+                imagen = manageData.getImage(slug_juego)    
+        return render_template("juegoResultado.html", info_juego = juego, id=id , nombre_lista=lista, slug=slug_juego , img = imagen)
         
     else:
         return render_template('401.html'), 401 

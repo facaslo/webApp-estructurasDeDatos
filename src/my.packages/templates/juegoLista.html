@@ -1,6 +1,6 @@
-{% extends 'base/base.html' %}
-
-{% block titulo %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
     <link rel="stylesheet" type = "text/css" href = "{{ url_for('static', filename='css/styleuser.css') }}">
     <title id = titulo> {{nombre_Juego}} </title>  
     
@@ -11,10 +11,10 @@
             window.location.href = urlJuegoEliminado;
         } 
     </script>
-{% endblock %}
-
-{% block content%}    
-    
+    <link rel="stylesheet" type = "text/css" href = "{{ url_for('static', filename='css/custom.css') }}">
+    <script src="{{ url_for('static', filename='javascript/funcionesFront.js') }}"></script>
+</head>
+<body class="fondo" onload="cambiarImagen('{{img}}')">
     <div class = "container marginContainer text-white">
         <div class="row">
             <div class="col-12">
@@ -31,19 +31,45 @@
             </div>
         </div>
         
-        <div class="row">
-            <ul class="col-12 justify-content-center">
-                <li> Nombre : {{info_juego.getElement(0)}} </li>
-                <li> Fecha de lanzamiento : {{info_juego.getElement(2)}} </li>
-                <li> Puntaje en metacritic : {{info_juego.getElement(3)}} </li>
-                <li> Página web : {{info_juego.getElement(4)}} </li>
-                <li> Plataformas : {{info_juego.getElement(5)}} </li> 
-                <li> Desarrolladoras : {{info_juego.getElement(6)}} </li>
-                <li> Géneros : {{info_juego.getElement(7)}} </li>
-                <li> Distribuidora : {{info_juego.getElement(8)}} </li>
-                <li> Rating Esrb : {{info_juego.getElement(9)}} </li>
-            </ol>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <img class="rounded mx-auto d-block py-1" id="imagen-juego" src="" alt="{{img}}">
+                </div>
+            </div>
+            <div class="row d-flex">
+                <ul class="list-group list-group-flush col-12 justify-content-center">
+                    <li class="list-group-item"> Nombre : {{info_juego.getElement(0)}} </li>
+                    <li class="list-group-item"> Fecha de lanzamiento : {{info_juego.getElement(2)}} </li>
+                    <li class="list-group-item"> Puntaje en metacritic : {{info_juego.getElement(3)}} </li>
+                    <li class="list-group-item"> Página web : {{info_juego.getElement(4)}} </li>
+                    <li class="list-group-item"> Plataformas : {{info_juego.getElement(5)}} </li> 
+                    <li class="list-group-item"> Desarrolladoras : {{info_juego.getElement(6)}} </li>
+                    <li class="list-group-item"> Géneros : {{info_juego.getElement(7)}} </li>
+                    <li class="list-group-item"> Distribuidora : {{info_juego.getElement(8)}} </li>
+                    <li class="list-group-item"> Rating Esrb : {{info_juego.getElement(9)}} </li>
+                </ul>
+            </div>
         </div>      
     </div>      
+</body>
+</html>
+
+
+
+
+
+
+
+{% extends 'base/base.html' %}
+
+{% block titulo %}
+    
+{% endblock %}
+
+
+{% block content%}    
+    
+    
     
 {% endblock %}

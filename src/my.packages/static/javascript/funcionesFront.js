@@ -22,3 +22,7 @@ function login(){
 function register(){
     window.location.href = '/register';
 }
+
+function cambiarImagen(url){
+    document.getElementById("imagen-juego").src = `${url}`;
+}
