@@ -1,4 +1,5 @@
 import math
+import ctypes
 
 class Node:
     def __init__(self, data):
@@ -262,7 +263,8 @@ class Array_Dinamic():
             raise ValueError("La capacidad debe ser un número")
         self.Size = 0
         self.capacity = capacity
-        self.Arr = [None for i in range(capacity)]
+        self.ArrayType = ctypes.py_object * capacity
+        self.Arr = self.ArrayType()
 
     def getElement(self, Index):
         if Index > self.Size or Index < 0:
@@ -280,7 +282,8 @@ class Array_Dinamic():
         if position > self.Size or position < 0:
             raise IndexError("Indice fuera del rango")
         if self.Size == self.capacity:
-            Arr1 = [None for i in range(self.capacity*2)]
+            self.ArrayType = ctypes.py_object * (self.capacity*2)
+            Arr1 = self.ArrayType()
             for i in range(position):
                 Arr1[i] = self.Arr[i] 
             Arr1[position]  = value
@@ -302,7 +305,8 @@ class Array_Dinamic():
 
     def Append(self, Value):
         if self.capacity == self.Size:
-           Arr1 = [None for i in range(self.capacity*2)]
+           self.ArrayType = ctypes.py_object * (self.capacity * 2)
+           Arr1 = self.ArrayType()
            for i in range(self.Size):
                Arr1[i] = self.Arr[i]
            self.Arr = Arr1
@@ -374,7 +378,8 @@ class Array_Dinamic():
         elif increasing:      
             if self.Size > self.capacity:
                 self.capacity *= 2
-                arr1 = [None for i in range(self.capacity)]                 
+                self.ArrayType = ctypes.py_object * self.capacity
+                arr1 = self.ArrayType()
                 while value > self.getElement(index):                   
                     index += 1
                     if(index == self.Size-1):
@@ -397,8 +402,9 @@ class Array_Dinamic():
             
         elif not increasing:            
             if self.Size > self.capacity:   
-                self.capacity*=2             
-                arr1 = [None for i in range(self.capacity)]            
+                self.capacity*=2       
+                self.ArrayType = ctypes.py_object * self.capacity
+                arr1 = self.ArrayType()                      
                 while value < self.getElement(index) :
                     index += 1
                     if(index == self.Size-1):

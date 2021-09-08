@@ -19,8 +19,8 @@ import time
 app = Flask(__name__, template_folder='templates')
 app.secret_key = "llave"
 
-#Tipo de estructura de árbol 
-tipoArbol = "avl"
+#Tipo de estructura de árbol (Valores: heap - avl)
+tipoArbol = "heap"
 # Total de usuarios para cargar, determina el tamaño de la tabla hash
 totalUsuarios = 100000
 # Límite de juegos para cargar en la base
@@ -44,7 +44,7 @@ def index():
     # Cargar la base de juegos 
     global baseJuegos
     if baseJuegos is None:
-        baseJuegos = manageData.cargarBaseJuegos(tipoArbol,limiteJuegos)
+        baseJuegos = manageData.cargarBaseJuegos(tipoArbol,limiteJuegos)        
         
     return render_template('index.html')
 

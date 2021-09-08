@@ -3,7 +3,7 @@ from SequentialStructures import Array_Dinamic
 class BinaryHeap:
     def __init__(self,size):        
         self.size = -1
-        self.h = Array_Dinamic(size+2)       
+        self.h = Array_Dinamic(size)       
 
     def IsEmpty(self):
         return self.h.IsEmpty()
@@ -18,7 +18,7 @@ class BinaryHeap:
         return 2*i+2
 
     def siftUp(self, i):
-        while i>0 and self.h.getElement(self.parent(i)).getElement(0).lower() < self.h.getElement(i).getElement(0).lower():
+        while i>0 and self.h.getElement(self.parent(i)).getElement(0).lower() > self.h.getElement(i).getElement(0).lower():
             temp = self.h.getElement(self.parent(i))
             self.h.Set(self.parent(i),self.h.getElement(i))
             self.h.Set(i,temp)
@@ -27,10 +27,10 @@ class BinaryHeap:
     def siftDown(self, i):
         maxindex = i
         l = self.leftChild(i)
-        if l <= self.size and self.h.getElement(l).getElement(0).lower() > self.h.getElement(maxindex).getElement(0).lower():
+        if l <= self.size and self.h.getElement(l).getElement(0).lower() < self.h.getElement(maxindex).getElement(0).lower():
             maxindex = l
         r = self.rightChild(i)
-        if r <= self.size and self.h.getElement(r).getElement(0).lower() > self.h.getElement(maxindex).getElement(0).lower():
+        if r <= self.size and self.h.getElement(r).getElement(0).lower() < self.h.getElement(maxindex).getElement(0).lower():
             maxindex = r
         if i != maxindex:
             temp = self.h.getElement(i)
@@ -43,7 +43,7 @@ class BinaryHeap:
         self.h.Append(p) 
         self.siftUp(self.size)
 
-    def extractMax(self):
+    def extractMin(self):
         result = self.h.getElement(0) 
         self.h.Set(0,self.h.getElement(self.size))          
         self.size -= 1

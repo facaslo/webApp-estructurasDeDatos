@@ -138,7 +138,7 @@ def cargarBaseJuegos(tipoArbol, totalJuegos):
             print("Ordenando los juegos con heap sort...")
 
             while heap.size >= 0:
-                todosLosJuegos.pushFront(heap.extractMax()) 
+                todosLosJuegos.pushBack(heap.extractMin()) 
             
             
         elif tipoArbol == "avl":
